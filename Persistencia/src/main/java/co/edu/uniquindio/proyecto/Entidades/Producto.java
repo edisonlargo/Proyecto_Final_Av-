@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Map;
+
 @Entity
 @Getter
 @Setter
@@ -22,20 +21,20 @@ public class Producto implements Serializable {
     private String nombre;
     private String Descripcion;
     private String precio;
-    @Enumerated(EnumType.STRING);
+    @Enumerated(EnumType.STRING)
     private Estado_producto disponibilidad;
     private String fecha_limite;
-    private String categoria;
+    @ElementCollection
+    private Map<String, String> categoria;
 
     private String comentario;
 
-    public Producto(String codigoProducto, String nombre, String descripcion, String precio, String fecha_limite, String categoria, String comentario) {
+    public Producto(String codigoProducto, String nombre, String descripcion, String precio, String fecha_limite, String comentario) {
         CodigoProducto = codigoProducto;
         this.nombre = nombre;
         Descripcion = descripcion;
         this.precio = precio;
         this.fecha_limite = fecha_limite;
-        this.categoria = categoria;
         this.comentario = comentario;
     }
 }
